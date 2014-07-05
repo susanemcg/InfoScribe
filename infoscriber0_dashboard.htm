@@ -1,0 +1,85 @@
+<!doctype html>
+<HTML lang="en">
+<HEAD>
+	<meta charset="utf-8" />
+	<title>InfoScribe: Dashboard</title>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+	<style type="text/css" media="screen">
+	</style>
+
+	<script src="lib/jquery-2.0.3.min.js"></script>
+	<script src="tempdata.js"></script>
+	<script>
+		//temporary
+		var id = 3; //current user
+		var infoscriber0_dashboard = true;
+		var progress = 1;
+	</script>
+	<script src="style.js"></script>
+	<script>
+		$(function(){
+			//
+			var main_str = "";
+
+			//
+			var my_str = "<h1>My projects</h1>";
+			for(var i in user_arr[id].projects){
+				j = user_arr[id].projects[i];
+				my_str += "<div class=\"projectunit\">";
+				my_str += 	"<div class=\"tag\">";
+				my_str += 		project_arr[j].tag;
+				my_str += 	"</div>";
+				my_str += 	"<div class=\"description\">";
+				my_str += 		"<strong><a href=\"infoscriber1_transcribe.htm\">"+project_arr[j].name+"</a></strong>";
+				my_str += 		"<br/>"+project_arr[j].description;
+				my_str += 	"</div>";
+				my_str += 	"<div class=\"bar\">";
+				my_str += 	"</div>";
+				my_str += "</div>";
+			}
+			$("#content").append( my_str );
+			//
+			var suggested_str = "<h1>Suggested for me</h1>";
+			for(var i in user_arr[id].suggested){
+				j = user_arr[id].suggested[i];
+				suggested_str += "<div class=\"projectunit\">";
+				suggested_str += 	"<div class=\"tag\">";
+				suggested_str += 		project_arr[j].tag;
+				suggested_str += 	"</div>";
+				suggested_str += 	"<div class=\"description\">";
+				suggested_str += 		"<strong><a href=\"infoscriber1_transcribe.htm\">"+project_arr[j].name+"</a></strong>";
+				suggested_str += 		"<br/>"+project_arr[j].description;
+				suggested_str += 	"</div>";
+				suggested_str += 	"<div class=\"bar\">";
+				suggested_str += 	"</div>";
+				suggested_str += "</div>";
+			}
+			$("#content").append( suggested_str );
+			//
+			var other_str = "<h1>Other projects</h1>";
+			for(var i in user_arr[id].other){
+				j = user_arr[id].other[i];
+				other_str += "<div class=\"projectunit\">";
+				other_str += 	"<div class=\"tag\">";
+				other_str += 		project_arr[j].tag;
+				other_str += 	"</div>";
+				other_str += 	"<div class=\"description\">";
+				other_str += 		"<strong><a href=\"infoscriber1_transcribe.htm\">"+project_arr[j].name+"</a></strong>";
+				other_str += 		"<br/>"+project_arr[j].description;
+				other_str += 	"</div>";
+				other_str += 	"<div class=\"bar\">";
+				other_str += 	"</div>";
+				other_str += "</div>";
+			}
+			$("#content").append( other_str );
+		});
+	</script>
+</HEAD>
+
+<BODY>
+<div id="wrapper">
+
+</div>
+</BODY>
+</HTML>

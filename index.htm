@@ -1,0 +1,160 @@
+<!doctype html>
+<HTML lang="en">
+<HEAD>
+	<meta charset="utf-8" />
+	<title>InfoScribe</title>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+	<style type="text/css" media="screen">
+		.sign-in{
+			/*position*/
+			/*box*/
+			/*text*/
+			color:white;
+			background-color:red;
+		}
+		form{
+			/*position*/
+			/*box*/
+			margin:16px 0 16px 0;
+			/*text*/
+		}
+		.form_title{
+			/*position*/
+			/*box*/
+			/*text*/
+			font-weight:bold;
+		}
+		.form_chunk{
+			/*position*/
+			/*box*/
+			margin:8px 0 8px 0;
+			/*text*/
+		}
+		label.longerversion{
+			/*position*/
+			/*box*/
+			/*text*/
+			font-style:italic;
+		}
+	</style>
+
+	<script src="lib/jquery-2.0.3.min.js"></script>
+	<script src="tempdata.js"></script>
+	<script>
+		//temporary
+		var id = null;
+		var infoscriber0_dashboard = false;
+		var progress = null;
+	</script>
+	<script src="style.js"></script>
+	<script>
+		$(function(){
+			//
+			var main_str = "";
+
+			main_str += '<!-- InfoScriber -->';
+			main_str += '<p>';
+			main_str += '	<span class="sign-in google">Sign in with Google</span>';
+			main_str += '</p>';
+			main_str += '<p>';
+			main_str += '	<span class="sign-in facebook">Sign in with Facebook</span>';
+			main_str += '</p>';
+			main_str += '<form action="infoscriber0_dashboard.htm">';
+			main_str += '	<div class="form_title">';
+			main_str += '		Sign up:';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="username">User name<span class="required">*</span></label>';
+			main_str += '		<br/><input type="text" name="username">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="email">Email<span class="required">*</span></label>';
+			main_str += '		<br/><input type="text" name="email">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="password">Password<span class="required">*</span></label>';
+			main_str += '		<br/><input type="password" name="password">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="confirm_password">Confirm password<span class="required">*</span></label>';
+			main_str += '		<br/><input type="password" name="confirm_password">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_submit">';
+			main_str += '		<input type="submit" value="Submit">';
+			main_str += '	</div>';
+			main_str += '</form>';
+			main_str += '<form action="infoscriber0_dashboard.htm">';
+			main_str += '	<div class="form_title">';
+			main_str += '		<span class="form_title">Sign in:</span>';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="email">Email</label>';
+			main_str += '		<br/><input type="text" name="email">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="password">Password</label>';
+			main_str += '		<br/><input type="password" name="password">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_submit">';
+			main_str += '		<input type="submit" value="Submit">';
+			main_str += '	</div>';
+			main_str += '</form>';
+
+			main_str += '<!-- Journalist -->';
+			main_str += '<form action="journalist0_dashboard.htm">';
+			main_str += '	<div class="form_title">';
+			main_str += '		<span class="form_title">Sign up as a journalist:</span>';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="username">Full name<span class="required">*</span></label>';
+			main_str += '		<br/><input type="text" name="username">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="organization">news organization<span class="required">*</span></label>';
+			main_str += '		<br/><input type="text" name="organization">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="email">Email associated with your news organization<span class="required">*</span></label>';
+			main_str += '		<br/><input type="password" name="email">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="password">Password<span class="required">*</span></label>';
+			main_str += '		<br/><input type="password" name="password">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="confirm_password">Confirm password<span class="required">*</span></label>';
+			main_str += '		<br/><input type="text" name="confirm_password">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_submit">';
+			main_str += '		<input type="submit" value="Submit">';
+			main_str += '	</div>';
+			main_str += '</form>';
+			main_str += '<form action="journalist0_dashboard.htm">';
+			main_str += '	<div class="form_title">';
+			main_str += '		<span class="form_title">Sign in as a journalist:</span>';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="email">Email</label>';
+			main_str += '		<br/><input type="text" name="email">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_chunk">';
+			main_str += '		<label for="password">Password</label>';
+			main_str += '		<br/><input type="password" name="password">';
+			main_str += '	</div>';
+			main_str += '	<div class="form_submit">';
+			main_str += '		<input type="submit" value="Submit">';
+			main_str += '	</div>';
+			main_str += '</form>';
+
+			$("#main .contentarea").html( main_str );
+		});
+	</script>
+</HEAD>
+
+<BODY>
+<div id="wrapper">
+
+</div>
+</BODY>
+</HTML>

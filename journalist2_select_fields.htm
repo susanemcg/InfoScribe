@@ -1,0 +1,193 @@
+<!doctype html>
+<HTML lang="en">
+<HEAD>
+	<meta charset="utf-8" />
+	<title>InfoScribe: Select Fields</title>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+	<style type="text/css" media="screen">
+	</style>
+
+	<script src="lib/jquery-2.0.3.min.js"></script>
+	<script src="lib/angular/angular.min.js"></script>
+	<script src="lib/angular/controller.js"></script>
+	<script>
+		var TranscriptionModule = angular.module( "TranscriptionApp",[] );
+		TranscriptionModule.controller( 
+			"TranscriptionController",	
+			function( $scope ){
+				var num_total = 20; //////could be less?
+				var num = 0;
+
+				$scope.transcription_array = [];
+
+				$scope.transcription = 	{
+											"field_name":"",
+											"field_name_radio":"", //"blank""redacted""illegible"
+											"fieldset_family":[],
+											"fieldset_family_radio":"", //"blank""redacted""illegible"
+											"duplicate":false
+										};
+				//field_name
+				$scope.field_name_add = function(){ 
+											$scope.transcription.field_name = $scope.field_name;
+										};
+				//fieldset_family
+				$scope.fieldset_family_add = 	function(){
+													$scope.transcription.fieldset_family.push(	{
+																									"position": 	$scope.fieldset_family_1,
+																									"organization":	$scope.fieldset_family_2,
+																									"description":	$scope.fieldset_family_3,
+																									"agency":		$scope.fieldset_family_4
+																								}
+													);
+												};
+				$scope.fieldset_family_remove =	function( $index ){
+													$scope.transcription.fieldset_family.splice( $index,1 );
+												};
+				//DUPLICATE & SUBMIT
+				$scope.newTranscription = 	function(){
+												//fill $scope.transcription
+												if( $scope.field_name_radio==null ){
+													$scope.field_name_radio = false;
+												}
+												$scope.transcription.field_name_radio = $scope.field_name_radio;
+												if( $scope.fieldset_family_1!=null || $scope.fieldset_family_2!=null || $scope.fieldset_family_3!=null || $scope.fieldset_family_4!=null ){
+													$scope.transcription.fieldset_family.push(	{
+																									"position": 	$scope.fieldset_family_1,
+																									"organization":	$scope.fieldset_family_2,
+																									"description":	$scope.fieldset_family_3,
+																									"agency":		$scope.fieldset_family_4
+																								}
+													);
+												}
+												if( $scope.fieldset_family_radio==null ){
+													$scope.fieldset_family_radio = false;
+												}
+												$scope.transcription.fieldset_family_radio = $scope.fieldset_family_radio;
+												if( $scope.duplicate==null ){
+													$scope.duplicate = false;
+												}
+												$scope.transcription.duplicate = $scope.duplicate;
+												//$scope.transcription_array, $scope.num
+												$scope.transcription_array.push( $scope.transcription );
+												$scope.num++;
+												if( $scope.num==num_total ){
+													//////move to congratulations page
+												}
+												//empty $scope.transcription
+												$scope.transcription = 	{
+																			"field_name":"",
+																			"field_name_radio":"", //"blank""redacted""illegible"
+																			"fieldset_family":[],
+																			"fieldset_family_radio":"", //"blank""redacted""illegible"
+																			"duplicate":false
+																		};
+												//////
+												console.log( $scope.transcription_array );
+											};
+			}
+		);
+	</script>
+</HEAD>
+<BODY>
+<div class="wrapper">
+
+	<div id="header">
+		<div class="contentarea">
+			<p>
+				InfoScribe | Hello, user.
+			</p>
+		</div>
+	</div>
+
+	<div id="main">
+		<div class="contentarea">
+
+			<div id="side">
+			</div>
+
+			<div id="progress">
+				<div class="bar">
+					<a href="journalist0_dashboard.htm">monitor projects</a>
+				</div>
+				<div class="bar">
+					<a href="journalist1_start_project.htm">1: start a new project</a>
+				</div>
+				<div class="bar active">
+					<a href="journalist2_select_fields.htm">2: select fields</a>
+				</div>
+			</div>
+
+			<div id="content">
+				<div id="pdfview">
+					<!-- //////styling: width, height, zoom -->
+					<object data="_dummy_pdfs/ASSEMBLYMEMBER-ESPINAL R.pdf" type="application/pdf" width="450px" height="475px"></object>
+				</div>
+
+				<div id="input" ng-app="TranscriptionApp">
+					<p>
+						<!-- //////status bar -->
+					</p>
+
+					<form ng-submit="newTranscription()" ng-controller="TranscriptionController">
+
+
+						<!-- transcription.fieldset_family -->
+						<p>
+							<br/>
+								<table>
+									<tr>
+										<td><span class="label">Field title </span></td>
+										<td><span class="label">Field description </span></td>
+										<td><span class="label">Field type </span></td>
+										<td><span class="label">How many are these on a document?</span></td>
+										<td></td>
+									</tr>
+									<tr ng-repeat="member in transcription.fieldset_family">
+										<td>{{member.position}}</td>
+										<td>{{member.organization}}</td>
+										<td>{{member.description}}</td>
+										<td>{{member.agency}}</td>
+										<td><a href="#" ng-click="fieldset_family_remove($index)">Remove</a></td>
+										<!-- //////ask if they're sure they want to delete -->
+									</tr>
+									<tr>
+										<td><input type="text" ng-model="fieldset_family_1"></td>
+										<td><input type="text" ng-model="fieldset_family_2"></td>
+										<td><input type="text" ng-model="fieldset_family_3"></td>
+										<td><input type="text" ng-model="fieldset_family_4"></td>
+										<!-- //////disable prepopulation -->
+										<td></td>
+									</tr>
+									<tr>
+										<td><a href="#" ng-click="fieldset_family_add()">Add field </a></td>
+									</tr>
+								</table>
+						</p>
+						
+						<!-- submit -->
+						<p>
+							<br/><button>Submit</button>
+						</p>		
+						
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="footer">
+		<div class="contentarea">
+			<p>InfoScribe | about | contact </p>
+		</div>
+	</div>
+
+
+	<div id="output">
+	</div>
+
+</div>
+</BODY>
+</HTML>

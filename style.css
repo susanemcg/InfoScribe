@@ -1,0 +1,180 @@
+		*{
+			/*position*/
+			/*box*/
+			padding:0px;
+			margin:0px;
+			/*text*/
+		}
+		#header{
+			/*position*/
+			/*box*/
+			background-color:black;
+			width:100%;
+			height:40px;
+			/*text*/
+			color:white;
+		}
+		#header .contentarea p{
+			/*position*/
+			/*box*/
+			padding:5px;
+			/*text*/
+			font-size:18px;
+			font-weight:bold;
+		}
+		#main{
+			/*position*/
+			overflow:auto; width:100%; /*instead of clear:both;*/
+			/*box*/
+			/*text*/
+		}
+		#main .contentarea{
+			/*position*/
+			/*box*/
+			padding:5px;
+			/*text*/
+			font-family: sans-serif;
+			font-size: 12px;
+		}
+		#footer{
+			/*position*/
+			overflow:auto; width:100%; /*instead of clear:both;*/
+			/*box*/
+			/*text*/
+		}
+		#footer .contentarea p{
+			/*position*/
+			/*box*/
+			padding:5px;
+			/*text*/
+		}
+
+
+		.contentarea{
+			/*position*/
+			/*box*/
+			width:1200px;
+			margin:0 auto;
+			/*text*/
+		}
+
+		/*#side*/
+		#side{
+			/*position*/
+			float:left;
+			/*box*/
+			background-color:#cccccc;
+			width:200px;
+			height:500px;
+			/*text*/
+		}
+
+		/*#progress*/
+		#progress{
+			/*position*/
+			float:right;
+			/*box*/
+			width:990px;
+			/*text*/
+		}
+		#progress a:link{
+			color:white;
+			text-decoration:none;
+		}
+		#progress a:visited{
+			color:white;
+			text-decoration:none;
+		}
+		#progress .bar{
+			/*position*/
+			float:left;
+			/*box*/
+			background-color:#dac4c1;
+			width:325px;
+			margin-right:5px;
+			/*text*/
+			color:white;
+		}
+		#progress .active{
+			/*position*/
+			/*box*/
+			background-color:#fbaf5d;
+			/*text*/
+		}
+		#progress .button{
+			/*position*/
+			float:left;
+			/*box*/
+			background-color:#fbaf5d;
+			width:985px;
+			margin:5px 5px 0 0;
+			/*text*/
+		}
+		#progress .button a:link{
+			color:#fff;
+			text-decoration:none;
+		}
+
+		/*#content*/
+		#content{
+			/*position*/
+			float:right;
+			/*box*/
+			width:990px;
+			margin-top:6px;
+			/*text*/
+		}
+		h1{
+			/*position*/
+			overflow:auto; width:100%; /*instead of clear:both;*/
+			/*box*/
+			/*text*/
+			font-size:16px;
+		}
+		.projectunit{
+			/*position*/
+			float:left;
+			/*box*/
+			background-color:#ccc;
+			width:490px;
+			height:60px;
+			margin:2px 5px 5px 0;
+			/*text*/
+		}
+		.projectunit .tag{
+			/*position*/
+			float:left;
+			/*box*/
+			background-color:blue;
+			width:60px;
+			height:60px;
+			margin-right:5px;
+			/*text*/
+			color:white;
+		}
+		.projectunit a{
+			color:black;
+		}
+
+			/*position*/
+			/*box*/
+			/*text*/
+
+
+
+		body{
+			font-family:helvetica,sans-serif;
+			font-size:14px;
+		}
+		#pdfview{
+			float:left;
+			width:450px;
+		}
+		#input{
+			float:left;
+			width:450px;
+			padding-left:10px;
+		}
+		.label{
+			font-weight:bold;
+		}
