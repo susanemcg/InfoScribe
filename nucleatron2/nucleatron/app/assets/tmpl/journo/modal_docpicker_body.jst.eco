@@ -1,0 +1,16 @@
+<div class="pages">
+<%- links = @pageLinks( @currentPage, @pageCount ) %>
+</div>
+
+<div class="documents">
+
+
+</div>
+
+
+<div class="pages">
+<%- links %>
+</div>
+
+
+

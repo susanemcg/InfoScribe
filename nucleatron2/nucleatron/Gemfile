@@ -1,0 +1,31 @@
+source 'https://rubygems.org'
+
+gem 'rails', '~> 4.1'
+
+gem 'pg'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+
+gem 'axlsx'
+
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'therubyracer'
+gem 'bootstrap-sass'
+gem 'eco'
+gem 'uglifier'
+gem 'tzinfo-data'
+
+group :development, :test do
+#  gem 'pry-plus'
+  gem 'shoulda-matchers'
+  gem 'guard'
+  gem 'guard-rake'
+  gem 'guard-minitest'
+  gem 'listen'
+  gem 'rb-fsevent'
+  gem 'terminal-notifier-guard'
+  gem 'ruby-prof'
+end

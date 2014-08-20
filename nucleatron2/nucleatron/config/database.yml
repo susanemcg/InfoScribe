@@ -1,0 +1,22 @@
+
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: <%= Rails.application.secrets.db_username %>
+  password: <%= Rails.application.secrets.db_password %>
+  allow_concurrency: true
+  host: localhost
+
+development:
+  <<: *defaults
+  database: nucleatron2_development
+
+
+production:
+  <<: *defaults
+  database: nucleatron2_production
+
+test:
+  <<: *defaults
+  database: nucleatron2_test

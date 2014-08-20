@@ -1,0 +1,5 @@
+<div class="document clearfix" id="<%= @id %>">
+  <img src="<%= @resources.thumbnail %>">
+  <h4 class="title"><%= @title %></h4>
+  <span class="updated_at"><%= strftime( '%b %d, %y %l:%M%P', new Date( Date.parse(@updated_at) ) ) %></span>
+</div>

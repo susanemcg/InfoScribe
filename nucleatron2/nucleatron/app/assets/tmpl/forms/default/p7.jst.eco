@@ -1,0 +1,7 @@
+
+    <label>President</label>
+    <input type="text" name="president" value="<%= @data.president %>">
+
+    <label>Highest Compensated Employee</label>
+    <input type="text" name="highest_compensated" value="<%= @data.highest_compensated %>">
+

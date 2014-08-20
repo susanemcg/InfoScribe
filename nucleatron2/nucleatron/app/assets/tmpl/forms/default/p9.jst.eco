@@ -1,0 +1,13 @@
+  <fieldset>
+    <legend>Finances</legend>
+
+    <label>Gross Revenue</label>
+    <input type="text" name="gross_revenue" value="<%= @data.gross_revenue %>">
+
+    <label>Net Income</label>
+    <input type="text" name="net_income" value="<%= @data.net_income %>">
+
+    <label>Total Revenue</label>
+    <input type="text" name="total_revenue" value="<%= @data.total_revenue %>">
+
+</fieldset>

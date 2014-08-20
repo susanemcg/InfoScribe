@@ -1,0 +1,15 @@
+<div class="btn-group">
+	<%= link_to 'Logout',logout_url,:class=>'btn' %>
+	<% if ! current_user.is_journalist? %>
+		<%= link_to 'Transcribe Random Document', random_document_url,:class=>'btn' %>
+		<p><strong>Login through a different account:</strong></p>
+		<ul class="services">
+			<li class=""><a class="icon twitter" href="<%= authentication_url(:twitter) %>" title="Twitter">Twitter</a></li>
+			<li class=""><a class="icon facebook" href="<%= authentication_url(:facebook) %>" title="Facebook">Facebook</a></li>
+			<li class=""><a class="icon google" href="<%= authentication_url(:google_oauth2) %>" title="Google">Google</a></li>
+		</ul>
+	<% end %>
+	<% if current_user.is_journalist? %>
+		<%= link_to 'Monitor Transcription',admin_url, :class=>'btn' %>
+	<% end %>
+</div>

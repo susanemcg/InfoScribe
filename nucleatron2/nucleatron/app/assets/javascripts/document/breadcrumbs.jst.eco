@@ -1,0 +1,19 @@
+<span>Pages</span>
+<table class="pages">
+	<tr>
+	<% for page in @page_arra: %>
+		<td data-pg="<%= page %>" class="<%= @response_coll.completion_status_for_response_w_page( page ) %> <%= 'focused' if page==@currentpage %>">
+				<%= page %>
+		</td>
+	<% end %>
+	</tr>
+</table>
+
+<span>Inputs</span>
+<table class="inputs">
+	<tr>
+	<% for input in @inputs: %>
+		<td class="<%= if input.value then 'complete' else 'empty' %>"></td>
+	<% end %>
+	</tr>
+</table>

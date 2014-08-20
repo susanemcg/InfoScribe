@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nucleatron</title>
+		<%= stylesheet_link_tag "document",:media=>"all" %>
+		<%= csrf_meta_tags %>
+	</head>
+
+	<body>
+
+		<div class="row-fluid wrapper">
+			<div id="document_container" class="">
+				<div id="embeded_document" class="DV-container">
+				</div>
+			</div>
+			<div id="form_container">
+			</div>
+		</div>
+
+		<script src="https://s3.amazonaws.com/s3.documentcloud.org/viewer/loader.js"></script>
+		<script>
+			window.form = <%= @document.hash.to_json.html_safe %>;
+			window.response_coll = <%= @document.responses.for_user( current_user ).ordered_by_page.to_json.html_safe %>;
+
+			//temporary namespacing
+			var NT = NT || { Model:{},View:{},Router:{},Util:{} };
+
+			NT.HOST = '<%= Rails.application.secrets.document_cloud_hostname %>';
+		</script>
+		<%= javascript_include_tag "document" %>
+
+	</body>
+</html>

@@ -1,0 +1,3 @@
+<% flash.each do |key,message| %>
+	<%= render :partial=>'layouts/flash_message', :locals=>{ :level=>key,:message=>message } %>
+<% end %>

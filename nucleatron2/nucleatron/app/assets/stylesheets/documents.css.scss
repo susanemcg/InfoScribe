@@ -1,0 +1,89 @@
+@import "bootstrap";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+body {
+  height: 100%;
+
+}
+
+.wrapper {
+  height: 100%;
+}
+
+#document_container {
+   bottom: 0;
+    left: 0;
+    overflow: auto;
+    position: absolute;
+    right: 275px;
+    top: 0;
+}
+
+#embeded_document{
+}
+
+#form_container {
+  float: right;
+  margin-left: 0px;
+  width: 250px;
+  hr {
+    margin: 3px 0;
+  }
+  button.save {
+    margin: 10px 0 0 160px;
+  }
+
+  .page-status {
+    border-bottom: 1px solid lightGrey;
+    margin-left: 4px;
+    span { 
+      font-size: 1.1em;
+    }
+    table {
+      width: 220px;
+    }
+    tr {
+      height: 10px;
+    }
+    tr.sections {
+      @include border-right-radius(10px);
+    }
+    td {
+      border: 2px solid white;
+      cursor: pointer;
+      text-align: center;
+      &.complete{
+        background-color:rgba(0,174,239,1); /*mediumBlue;*/
+        color: white;
+      }
+      &.partial{
+        background-color: lightBlue;
+        color: white;
+      }
+      &.empty {
+        background-color: lightGrey;
+      }
+      &.focused {
+        border-color: rgba(82,168,236,.35);
+        outline: 0;
+        outline: thin dotted \9; /* IE6-9 */
+        position: relative;
+        @include box-shadow(inset 0 3px 3px rgba(0,0,0,.2), 0 0 8px rgba(82,168,236,1));
+      }
+
+    }
+
+
+  }
+  
+  form {
+    margin: 0;
+    overflow-y: auto;
+    padding-left: 5px;
+  }
+}
+
+
+
+

@@ -1,0 +1,16 @@
+
+  <fieldset>
+    <legend>Organization</legend>
+
+    <label>New Services?
+    <input type="checkbox" name="new_services" value="<%= @data.new_services %>">
+    </label>
+
+    <label>Stated Purpose</label>
+    <textarea rows="5" name="organization_purpose"><%= @data.organization_purpose %></textarea>
+
+    <label>Other Details</label>
+    <input name="other_details" type="text" value="<%= @data.other_details %>">
+
+
+</fieldset>

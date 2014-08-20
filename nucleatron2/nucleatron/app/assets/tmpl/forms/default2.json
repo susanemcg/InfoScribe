@@ -1,0 +1,123 @@
+[
+	{
+	 "page":1,
+	 "label":"Begin Date",
+	 "type":"text",
+	 "name":"begin_date",
+	 "placeholder":"MM/DD/YYYY",
+	 "value":"<%= @data.begin_date %>",
+	 "validation":null,
+	 "class":null,
+	 "style":null
+	},
+	{
+	 "page":1,
+	 "label":"End Date",
+	 "type":"text",
+	 "name":"end_date",
+	 "placeholder":"MM/DD/YYYY",
+	 "value":"<%= @data.end_date %>",
+	 "validation":null,
+	 "class":null,
+	 "style":null
+	},
+	{
+	 "page":1,
+	 "label":"Organization Name",
+	 "type":"text",
+	 "name":"organization_name",
+	 "placeholder":null,
+	 "value":"<%= @data.organization_name %>",
+	 "validation":null,
+	 "class":null,
+	 "style":null
+	},
+	{
+	 "page":1,
+	 "label":"Address",
+	 "type":"text",
+	 "name":"address1",
+	 "placeholder":null,
+	 "value":"<%= @data.address1 %>",
+	 "validation":null,
+	 "class":null,
+	 "style":null
+	},
+	{
+	 "page":1,
+	 "label":null,
+	 "type":"text",
+	 "name":"city",
+	 "placeholder":"City",
+	 "value":"<%= @data.city %>",
+	 "validation":null,
+	 "class":"input-small",
+	 "style":null
+	},
+	{
+	 "page":1,
+	 "label":null,
+	 "type":"text",
+	 "name":"state",
+	 "placeholder":"State",
+	 "value":"<%= @data.state%>",
+	 "validation":null,
+	 "class":"input-small",
+	 "style":"width:30px;"
+	},
+	{
+	 "page":1,
+	 "label":null,
+	 "type":"text",
+	 "name":"zip",
+	 "placeholder":"Postal",
+	 "value":"<%= @data.zip %>",
+	 "validation":null,
+	 "class":"input-small",
+	 "style":"width:50px;"
+	},
+	{
+	 "page":1,
+	 "label":"Purpose",
+	 "type":"text",
+	 "name":"purpose",
+	 "placeholder":null,
+	 "value":"<%= @data.purpose %>",
+	 "validation":null,
+	 "class":null,
+	 "style":null
+	},
+	{
+	 "page":1,
+	 "label":"Revenue",
+	 "type":"text",
+	 "name":"revenue",
+	 "placeholder":null,
+	 "value":"<%= @data.revenue %>",
+	 "validation":null,
+	 "class":null,
+	 "style":null
+	},
+	{
+	 "page":1,
+	 "label":"Expenses",
+	 "type":"text",
+	 "name":"expenses",
+	 "placeholder":null,
+	 "value":"<%= @data.expenses %>",
+	 "validation":null,
+	 "class":null,
+	 "style":null
+	},
+	{
+	 "page":1,
+	 "label":"Reported Net",
+	 "type":"text",
+	 "name":"reported_net",
+	 "placeholder":null,
+	 "value":"<%= @data.reported_net %>",
+	 "validation":null,
+	 "class":null,
+	 "style":null
+	}
+]

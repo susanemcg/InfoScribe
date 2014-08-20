@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nucleatron</title>
+		<%= stylesheet_link_tag "journo",:media=>"all" %>
+		<%= csrf_meta_tags %>
+	</head>
+
+	<body>
+		<%= render :partial=>'layouts/flash_message_all' %>
+
+		<div class="container" id="tabs">
+		</div>
+
+		<script>
+			//temporary namespacing
+			var NT = NT || { Model:{},View:{},Router:{},Util:{} };
+
+			NT.HOST = '<%= Rails.application.secrets.document_cloud_hostname %>';
+			// NT.Model.CurrentUser.set(<%= current_user.hash.to_json.html_safe %>); /////////why do I need this?
+		</script>
+		<%= javascript_include_tag "journo" %>
+		<script>
+			//DOCUMENT
+			//PROJECT
+			NT.Model.Project = Backbone.Model.extend({
+				url:'/api/project',
+				//initialize
+				initialize: function(){},
+				//+
+				documents: function(){
+					if( this.docs==null ){
+						this.docs = new NT.Data.DocumentSet( this.get('documents'),{ form:this });
+					}
+					return this.docs;
+				},
+				toJSON: function() {
+					return _.extend( Backbone.Model.prototype.toJSON.apply(this,arguments),{ 'documents':this.documents().toJSON() });
+				}
+			});
+			NT.View.Project = Backbone.View.extend({
+				//
+				className:"row form",
+				initialize: function(){
+					_.bindAll( this,'newDoc','render' );
+					this.model.on( 'change',this.render );
+					this.model.documents().on( 'add',this.render );
+					this.model.documents().on( 'remove',this.render );
+				},
+				//
+				render: function(){
+					this.$el.html( NT.Util.Render("view_project",this.model) );
+					return this;
+				},
+				//
+				events:{
+					'click .add':'onAdd',
+					'click .close.deletedoc':'onDeleteDoc'
+					//, 'click .viewResponse':'onViewResponse'
+				},
+				onAdd: function(){
+					return this.options.form.showPicker(this.newDoc); //////showPicker
+				},
+				newDoc: function(doc){
+					return this.model.documents().createFromDCloud(doc);
+				},
+				onDeleteDoc: function(ev){
+					var doc_id = parseInt( $(ev.target).closest('.document').attr('data-id') );
+					var doc = this.model.documents().detect( function(doc){ return doc.id===doc_id; });
+					return doc.destroy();
+				}
+			});
+			NT.Model.ProjectCollection = Backbone.Collection.extend({
+				model:NT.Model.Project,
+				url:'/api/projects'
+			});
+			NT.View.ProjectCollection = Backbone.View.extend({
+				//
+				initialize: function(){
+					this.collection = new NT.Data.ProjectCollection;
+					this.collection.on( 'reset',this.render,this );
+					this.collection.on( 'sync', this.render,this );
+					this.collection.fetch();
+				},
+				//
+				render: function(){
+					this.$el.html( window.JST["view_projectcollection"](this.collection) );
+					return this.collection.each( this.renderOne,this );
+				},
+				renderOne: function(doc){
+					var one = new Project({ model:doc,form:this });
+					return this.$('.form_sets').append( one.render().el );
+				},
+				//
+				events:{
+					'click .addset':'addSet'
+				},
+				addSet: function(){
+					var proj_name = this.$('.new_set_name').val() || "Untitled";
+					return this.showPicker( this.newSet,proj_name );
+				},
+				showPicker: function(action,proj_name){ //////showPicker
+					this.docAction = action;
+					this.picker = new NT.View.DCDocPicker({ name:this.$('.new_set_name').val() });
+					this.picker.on( 'docselected',this.docSelected,this );
+					this.picker.render();
+					$('body').append( this.picker.el );
+					return this.picker.show();
+				},
+				docSelected: function(doc){
+					this.docAction(doc);
+					return this.picker.hide();
+				},
+				newSet: function(doc){
+					this.collection.create({ source_document:doc, name:this.$('.new_set_name').val() });
+					return this;
+				},
+				addDoc: function(ev){
+					this.addingToSet = ev.target;
+					return this.showPicker( this.newDoc );
+				}
+			});
+
+//NT.View.DCDocPicker
+	// ModalDialog = Backbone.View.extend({
+	// 	className:'modal fade',
+	// 	render: function(){
+	// 		this.$el.html( JST["modal"]( _.clone( this.options ) ) ); //doesn't work for IE8
+	// 		//this.el.innerHTML( JST["modal"]( _.clone( this.options ) ) ); //works for IE8
+	// 		return this;
+	// 	},
+	// 	hide: function(){
+	// 		this.$el.modal('hide');
+	// 		return this;
+	// 	},
+	// 	show: function(){
+	// 		this.$el.modal('show');
+	// 		return this;
+	// 	},
+	// 	setTitle: function(html){
+	// 		this.$('.modal-header .title').html(html);
+	// 		return this;
+	// 	},
+	// 	setBody: function(html){
+	// 		this.$('.modal-body').html(html);
+	// 		return this;
+	// 	}
+	// });
+NT.View.DCDocPicker = Backbone.View.extend({
+	//
+	className:'modal fade',
+	initialize: function(){
+		this.search = NT.Model.CurrentUser.DCDocuments();
+		this.search.on( 'pageload',this.renderBody,this );
+		//super
+		this.$el.addClass('document_picker');
+	},
+	renderBody: function(){
+		this.setBody( NT.Util.Render( 'modal_docpicker_body',{ currentPage:this.search.currentPage(),pageCount:this.search.pageCount() } ) );
+		this.$('.documents').html('');
+		return this.search.documents().each( ( function(_this){
+		                                           return function(document){
+		                                               return _this.appendDocument(document);
+		                                           };
+		                                       }
+		                                   )(this));
+	},
+	appendDocument: function(doc){
+		this.$('.documents').append( NT.Util.Render( 'modal_docpicker_document',doc ) );
+	},
+	//
+	render: function(){
+		this.$el.html( JST["modal"]( _.clone( this.options ) ) ); //doesn't work for IE8
+		//this.el.innerHTML( JST["modal"]( _.clone( this.options ) ) ); //works for IE8
+		this.setTitle( "New Project: "+this.options.name );
+		this.setBody( JST["modal_projpicker"] );
+		return this;
+	},
+	hide: function(){
+		this.$el.modal('hide');
+		return this;
+	},
+	show: function(){
+		this.$el.modal('show');
+		return this;
+	},
+	setTitle: function(html){
+		this.$('.modal-header .modal-title').html(html);
+		return this;
+	},
+	setBody: function(html){
+		this.$('.modal-body').html(html);
+		return this;
+	}
+	//
+});
+
+//NT.Model.CurrentUser //.DCDocuments
+//NT.Model.DCSearch
+
+
+			//
+			NT.Util.addCSRF( $("meta[name='csrf-token']").attr('content') )
+			//
+			// NT.View.NavTabs = new NT.View.Tabs({ el: $('#tabs') }).render();
+			// need to be able to 
+			// view all projects(forms)
+			// add/edit/delete project(form)
+			// select documents from DC
+
+			// NT.View.FormSets()
+
+		</script>
+
+	</body>
+</html>

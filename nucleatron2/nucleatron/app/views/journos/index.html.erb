@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nucleatron</title>
+		<%= stylesheet_link_tag "journo",:media=>"all" %>
+		<%= csrf_meta_tags %>
+	</head>
+
+	<body>
+		<%= render :partial=>'layouts/flash_message_all' %>
+
+		<div class="container" id="tabs">
+		</div>
+
+		<script>
+			//temporary namespacing
+			var NT = NT || { Model:{},View:{},Router:{},Util:{} };
+
+			NT.HOST = '<%= Rails.application.secrets.document_cloud_hostname %>';
+			// NT.Model.CurrentUser.set(<%= current_user.hash.to_json.html_safe %>); /////////why do I need this?
+		</script>
+		<%= javascript_include_tag "journo" %>
+		<script>
+			//DOCUMENT
+			//PROJECT
+			NT.Model.Project = Backbone.Model.extend({
+				url:'/api/forms',
+				//+
+				documents: function(){
+					if( this.docs==null ){
+						this.docs = new NT.Model.DocumentCollection( this.get('documents'),{ form: this });
+					}
+					return this.docs;
+				}
+			});
+			NT.Model.ProjectCollection = Backbone.Collection.extend({
+				model:NT.Model.Project,
+				url:'/api/forms'
+			});
+			NT.View.Project = Backbone.View.extend({
+				//render
+				className:"row form",
+				render: function(){
+					this.$el.html( NT.Util.RenderWithPagination( "journo/view_project",this.model ) );
+					console.log( "render: "+this.model );
+					return this;
+				},
+				//initialize
+				initialize: function(){
+					//initialize
+					//listen
+					_.bindAll( this,'newDoc','render' );
+					this.listenTo( this.model,            "change",this.render );
+					this.listenTo( this.model.documents(),"add",   this.render );
+					this.listenTo( this.model.documents(),"remove",this.render );
+				},
+				//events
+				events:{
+					"click .add": "onAdd",
+					"click .close.deletedoc": "onDel"
+				},
+				onAdd: function(){
+					proj_name = this.$("h3").html() || "";
+					console.log( "onAdd: "+proj_name );
+					/////////this.options.form.showPicker( this.newDoc,"Add Document To Project "+proj_name );
+				},
+				newDoc: function(doc){
+					this.model.documents().createFromDC( doc );
+				},
+				onDel: function(ev){
+					var doc_id = parseInt( $(ev.target).closest('.document').attr('data-id') );
+					var doc = this.model.documents().detect( function(doc){ return doc.id===doc_id; });
+					console.log( "onDel: "+doc );
+					/////////ask user if they're sure
+					doc.destroy();
+				}
+			});
+			NT.View.ProjectCollection = Backbone.View.extend({
+				//render
+				render: function(){
+					this.$el.html( window.JST["journo/view_projectcollection"]( this.collection) );
+					this.collection.each( this.renderEach,this );
+					return this;
+				},
+				renderEach: function(each){
+					proj = new NT.View.Project({ model:each,form:this });
+					this.$(".project_coll").append( proj.render().el );
+				},
+				//initialize
+				initialize: function(){
+					//initialize
+					this.collection = new NT.Model.ProjectCollection;
+					this.collection.fetch(); //fetch() retrieves a set of models from the server //in the form of a JSON array  //by sending an HTTP GET request //to the URL specified by the collection's url property
+					//listen
+					this.listenTo( this.collection,"reset",this.render );
+					this.listenTo( this.collection,"sync", this.render );
+				}
+			});
+
+
+			//NT.View.DCDocPicker
+			NT.View.DCDocPicker = Backbone.View.extend({
+				//
+			});
+			//NT.Model.CurrentUser //.DCDocuments
+			//NT.Model.DCSearch
+
+
+			//////////////////////////////
+			//
+			NT.Util.addCSRF( $("meta[name='csrf-token']").attr('content') )
+			//
+			// NT.View.NavTabs = new NT.View.Tabs({ el:$('#tabs') }).render();
+			new NT.View.ProjectCollection({ el:$('#tabs') }).render();
+
+			// need to be able to 
+			// view all projects(forms)
+			// add/edit/delete project(form)
+			// select documents from DC
+
+
+		</script>
+
+	</body>
+</html>

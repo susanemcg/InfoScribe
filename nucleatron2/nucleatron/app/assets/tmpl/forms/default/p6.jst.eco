@@ -1,0 +1,5 @@
+
+
+    <label>Record Keeper</label>
+    <input type="text" name="record_keeper" value="<%= @data.record_keeper %>"/>
+
