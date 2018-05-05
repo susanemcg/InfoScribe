@@ -14,4 +14,12 @@ While the full platform is still under development, you can see some example pag
 [Transcription template page](https://susanemcg.github.io/InfoScribe/schema_page.html)
 
 
+For additional background on the inspiration for InfoScribe and related projects, please visit the original project blog: http://infoscribe.tumblr.com/
+
+*InfoScribe has been developed with the help of several exceptional research assistants over the years, including:*
+
+* Aram Chung (Bloomberg)
+* Ranjith S Kumar (Facebook)
+* Madeleine K.B. Ross (Enigma)
+
 
