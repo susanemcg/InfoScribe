@@ -1,0 +1,44 @@
+<div> <!--this one is to wrap everything up in -->
+<div class="row marketing">
+		<div ng-repeat="collection in recentcollections.collections | limitTo:3" class="col-md-4">
+			<div class="docset">
+				<div class="doc-desc">
+					<h5>{{collection.title}}</h5>
+					<div>{{collection.description}}</div>
+					<div>Tags: {{collection.tags.join(', ')}}</div>
+					<div>Total documents: {{collection.docs.length}}</div>
+				</div>
+				<div>
+				<button ng-hide="collection.collectionDone">Start transcribing</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="collectionsList" ng-controller="TabController as panel">
+			<ul class="nav nav-pills">
+				<li ng-class="{active:panel.amISelected(1)}"> <a href ng-click="panel.selectTab(1)">Latest</a> </li>
+				<li ng-class="{active:panel.amISelected(2)}"> <a href ng-click="panel.selectTab(2)">By category</a> </li>
+				<li ng-class="{active:panel.amISelected(3)}"> <a href ng-click="panel.selectTab(3)">By contributor</a> </li>
+			</ul>
+			<div class="panel" ng-show="panel.amISelected(1)">
+				<div ng-repeat="collection in recentcollections.collections | orderBy:panel.sortByTranscriptionDeadline">
+					<h5>{{collection.title}}</h5>
+					{{collection.date_added}}, {{collection.transcription_deadline}}
+				</div>
+			</div>
+			<div class="panel" ng-show="panel.amISelected(2)">
+				<div ng-repeat="collection in recentcollections.collections | orderBy:collection.category">
+					<h5>{{collection.title}}</h5>
+					{{collection.category}}, {{collection.transcription_deadline}}
+				</div>
+			</div>
+			<div class="panel" ng-show="panel.amISelected(3)">
+				<div ng-repeat="collection in recentcollections.collections | orderBy:collection.owner">
+					<h5>{{collection.title}}</h5>
+					{{collection.owner}}, {{collection.transcription_deadline}}
+				</div>
+			</div>
+</div>
+
+<!-- end main div -->
+</div> 

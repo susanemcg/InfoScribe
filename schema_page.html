@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="infoscribe-schema">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>InfoScribe</title>
+<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/lib/bootstrap-theme.min.css">
+
+<script src="js/lib/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="js/lib/bootstrap.min.js"></script>
+<!--
+<script src="js/lib/ocrad.js"></script>
+-->
+
+    <!-- Custom styles for this template -->
+    	<link href="css/infoscribe.css" rel="stylesheet">
+    	<script type="text/javascript" src="js/lib/moment.js"></script>
+		<script type="text/javascript" src="js/lib/angular.min.js"></script>
+		<script type="text/javascript" src="js/infoscribe.js"></script>
+		<script type="text/javascript" src="js/schema.js"></script>
+
+	</head>
+	<body>
+
+	<div class="container">
+		<form name="transcription_form" ng-controller="TranscriptionController as transcriptionCtrl" ng-submit="transcription_form.$valid && transcriptionCtrl.submitData()" novalidate>
+	      <div class="jumbotron" id="create_schema" style="padding-top:0px;">
+	       <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Hello, SampleUser</a></li>
+        </ul>
+        <h3 class="info-red">InfoScribe</h3>
+      </div>	
+	      <div class="rounded-white" style="padding-top:0px;">
+	        
+	        <div class="row">
+	        	<div class="col-md-12"><h3 class="info-red">Sample Project</h3>
+	        		Create a new transcription field by holding down the <span class="info-red">SHIFT</span> key and dragging your mouse to create a rectangle around the part of the document where the information will typically appear.<br/>
+					<hr/>	        		
+	        	</div>
+	        </div>
+	        <div class="row">
+	        	<div class="col-md-7" style="padding-right:0px;">
+	        			<div class="col-md-9" style="padding-left:0px;"><span class="info-red">Double-click to zoom, and drag to pan the image.</span> To reset the zoom level, click the "Reset zoom."</div>
+	        			<div class="col-md-2" style="padding-left:0px;">
+	        			<div class="btn btn-sm btn-success" ng-click="transcriptionCtrl.resetZoom($event)">Reset zoom</div>
+	        			</div>
+	        			<div class="col-md-1"></div>
+	        	</div>
+	        	<div class="col-md-5" style="padding-left:0px">
+
+	        		<div class="info-red"><b>Current schema:</b></div>
+	        	</div>
+	        </div>
+	        <div class="row">
+	        	<div class="col-md-7">
+					<div class="row">
+						<div class="col-md-12">
+						<div class="docView"> 
+							<div id="theDoc" class="docContainer" ng-dblclick="transcriptionCtrl.zoom($event)" ng-mousedown="transcriptionCtrl.handleMouseDown($event)" ng-mouseup="transcriptionCtrl.handleMouseUp($event)" ng-mousemove="transcriptionCtrl.handleMouseMove($event)">
+								<img doc-image ng-src="{{transcriptionCtrl.currentDoc.doc_link}}" width="100%" height="100%"/>
+								<div ng-repeat="transcription_field in transcriptionCtrl.docModel"  class="highlightRect" ng-style="transcription_field.placementStyle">
+									<div class="highlightLabel">{{$index+1}}</div>
+								</div> 
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-5" style="padding-left:0px;">
+					<div id="allContainer">
+						<div class="">
+								<div ng-repeat="transcription_field in transcriptionCtrl.docModel" class="row">
+								<!--	<div class="col-md-1"></div> -->
+									<div class="col-md-12 rounded-beige" style="margin-top:3%">
+									<div class="col-md-1">
+										<b><span class="info-red">{{$index+1}}.</span>
+									</div>
+									<div class="col-md-7" style="padding-left:0px;">
+										<span>   {{transcription_field.fieldName}}</span></b>
+									</div>
+									<div class="col-md-3">
+									<span> 
+									  {{transcription_field.dataType.value}}</span><br/>
+									<button ng-click="transcriptionCtrl.deleteFromModel($index)">Remove</button>
+									</div>
+									</div>
+									<!--<div class="col-md-1"></div>-->
+								</div>
+						</div>
+						<div id="workingHighlightHolder" class="row" style="margin-top:3%;">
+							<!--<div class="col-md-1"></div> -->
+							<div ng-show="transcriptionCtrl.currentTranscription.highlight" class="rounded-beige col-md-12">
+								<!--
+								<div class="highlightLabel">{{docModel.length+1}}</div>
+							-->
+								<span class="info-red"><b>Add a new field for transcription:</b></span><br/>
+								<span class="info-red">Field name:</span><input type="text" ng-model="transcriptionCtrl.currentTranscription.fieldName" required/>
+								<span>Data type: </span><select ng-model="transcriptionCtrl.currentTranscription.dataType" ng-options="opt as opt.label for opt in transcriptionCtrl.fieldOptions" required></select><br/>
+								<div ng-show="!transcriptionCtrl.currentTranscription.isValid" class="info-red">Please enter a field name and/or data type.</div>
+							<button class="btn btn-sm btn-success" ng-click="transcriptionCtrl.saveToModel($event)">Save</button>
+							<button ng-click="transcriptionCtrl.deleteHighlight($event)">Clear</button>
+							</div>
+						<!--<div class="col-md-1"></div> -->	
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-10"></div>
+				<div class="col-md-2">
+					<button class="btn btn-sm btn-success" ng-click="transcriptionCtrl.submitData()">Save schema</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	</body>
+</html>
+

@@ -1,0 +1,69 @@
+[
+	{
+		"doc_id":1,
+		"collection_id":1,
+		"doc_link":"docs/SampleImage.png",
+		"data_fields" : [
+			{
+				"field_name": "field_1_text",
+				"field_type": "text",
+				"field_id": 1
+			},
+			{
+				"field_name": "field_2_number",
+				"field_type": "number",
+				"field_id": 2
+			},
+			{
+				"field_name": "field_3_number",
+				"field_type": "number",
+				"field_id": 3
+			}	
+		]
+
+	},
+	{
+		"doc_id":2,
+		"collection_id":1,
+		"doc_link":"docs/SampleImage.png",
+		"data_fields" : [
+			{
+				"field_name": "field_1",
+				"field_type": "string",
+				"field_id": 1
+			},
+			{
+				"field_name": "field_2",
+				"field_type": "string",
+				"field_id": 2
+			},
+			{
+				"field_name": "field_3",
+				"field_type": "string",
+				"field_id": 3
+			}	
+		]
+	},
+	{
+		"doc_id":3,
+		"collection_id":1,
+		"doc_link":"docs/SampleImage.png",
+		"data_fields": [
+			{
+				"field_name": "field_1",
+				"field_type": "string",
+				"field_id": 1
+			},
+			{
+				"field_name": "field_2",
+				"field_type": "string",
+				"field_id": 2
+			},
+			{
+				"field_name": "field_3",
+				"field_type": "string",
+				"field_id": 3
+			}	
+		]
+	}
+]

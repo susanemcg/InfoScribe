@@ -1,0 +1,28 @@
+<div> <!--this one is to wrap everything up in -->
+<div id="collectionsList" ng-controller="TabController as panel">
+	<!--this would be a good place to implement filtering for the first time!!-->
+			<h4 class="info-red">Open projects</h4>
+			<div class="panel rounded-bordered">
+				<div ng-repeat="collection in recentcollections.collections | orderBy:panel.sortByTranscriptionDeadline" class="bottom-border">
+					<h5>{{collection.title}}</h5>
+					{{collection.date_added}}, {{collection.transcription_deadline}}
+				</div>
+			</div>
+			<h4 class="info-red">Embargoed projects</h4>
+			<div class="panel rounded-bordered">
+				<div ng-repeat="collection in recentcollections.collections | orderBy:collection.category" class="bottom-border">
+					<h5>{{collection.title}}</h5>
+					{{collection.category}}, {{collection.transcription_deadline}}
+				</div>
+			</div>
+			<h4 class="info-red">Completed projects</h4>
+			<div class="panel rounded-bordered">
+				<div ng-repeat="collection in recentcollections.collections | orderBy:collection.owner" class="bottom-border">
+					<h5>{{collection.title}}</h5>
+					{{collection.owner}}, {{collection.transcription_deadline}}
+				</div>
+			</div>
+</div>
+
+<!-- end main div -->
+</div> 

@@ -1,0 +1,68 @@
+{"docModel": [
+  {
+    "highlight": 1,
+    "isValid": 1,
+    "fieldName": "Date",
+    "dataType": {
+      "label": "date",
+      "value": "date"
+    },
+    "placement": {
+      "leftOffset": 58,
+      "topOffset": 287,
+      "width": 65.52,
+      "height": 10.01142857142857
+    },
+    "placementStyle": {
+      "position": "absolute",
+      "top": "172.00342465753425px",
+      "left": "31.86813186813187px",
+      "width": "36px",
+      "height": "5.999999999999999px"
+    }
+  },
+  {
+    "highlight": 1,
+    "isValid": 1,
+    "fieldName": "Name",
+    "dataType": {
+      "label": "text",
+      "value": "text"
+    },
+    "placement": {
+      "leftOffset": 180,
+      "topOffset": 287,
+      "width": 70.98,
+      "height": 15.017142857142858
+    },
+    "placementStyle": {
+      "position": "absolute",
+      "top": "172.00342465753425px",
+      "left": "98.90109890109889px",
+      "width": "39px",
+      "height": "9px"
+    }
+  },
+  {
+    "highlight": 1,
+    "isValid": 1,
+    "fieldName": "Amount",
+    "dataType": {
+      "label": "number",
+      "value": "number"
+    },
+    "placement": {
+      "leftOffset": 417,
+      "topOffset": 295,
+      "width": 70.98,
+      "height": 10.01142857142857
+    },
+    "placementStyle": {
+      "position": "absolute",
+      "top": "176.79794520547944px",
+      "left": "229.12087912087912px",
+      "width": "39px",
+      "height": "5.999999999999999px"
+    }
+  }
+]}
